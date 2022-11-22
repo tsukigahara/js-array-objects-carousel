@@ -1,6 +1,6 @@
 //CAROUSEL SCRIPT
 
-// create array of all image elements
+//array of all image elements
 const images = [ 
     {   
         image: 'img/01.webp', 
@@ -30,29 +30,23 @@ const images = [
 
 console.log(images);
 
-function createImg(array, position){
-    var itemHTML = document.createElement("img");
-    itemHTML.classList.add("d-block");
-    itemHTML.classList.add("mycarousel_item");
-    itemHTML.setAttribute("src", array[position].image);
-    itemHTML.setAttribute("id", "itemID-"+position);
-    return itemHTML;
-}
-
 //default value 0 for determinate array position 
 var position = 0;
 
-var contentHTML = document.querySelector(".mycarousel_content");
-contentHTML.append(createImg(images, position));
+//create first image DOM
+createImg(images, position);
+
 
 function Down (){
-
+    
+    //by default position should be 0
     console.log(position);
 
     if (position < images.length){
 
         var contentHTML = document.querySelector(".mycarousel_content");
         contentHTML.innerHTML = "";
+
         position++;
         //by default is false. this checks if we are going further than position 4 (if true, we are on last image)
         if (position > images.length - 1){
@@ -60,7 +54,7 @@ function Down (){
             position = 0;
         }
 
-        contentHTML.append(createImg(images, position));
+        createImg(images, position);
 
         //DEBUG
         if(position == 0){
@@ -75,9 +69,10 @@ function Down (){
 }
 
 function Up (){
+
     //by default position should be 0
     console.log(position);
-    //by defalut if (0 < 5)
+
     if (position < images.length){
 
         var contentHTML = document.querySelector(".mycarousel_content");
@@ -92,7 +87,7 @@ function Up (){
             position = images.length - 1;
         }
 
-        contentHTML.append(createImg(images, position));
+        createImg(images, position);
 
         //DEBUG
         if(position == 0){
@@ -104,4 +99,36 @@ function Up (){
     }
     //by default this shoud be 4
     console.log(position);
+}
+
+
+//create all carousel content
+function createImg(array, position){
+    
+    // get class
+    var contentHTML = document.querySelector(".mycarousel_content");
+
+    // create img tag
+    var itemHTML = document.createElement("img");
+    itemHTML.classList.add("d-block");
+    itemHTML.classList.add("mycarousel_item");
+    itemHTML.setAttribute("src", array[position].image);
+    itemHTML.setAttribute("id", "itemID-"+position);
+    contentHTML.append(itemHTML);
+    
+    //create div info
+    var infoHTML = document.createElement("div");
+    infoHTML.classList.add("mycarousel_info");
+    infoHTML.setAttribute("id", "infoID-"+position);
+    contentHTML.append(infoHTML);
+
+    //create h3 tag
+    var titleHTML = document.createElement("h3");
+    titleHTML.innerHTML = array[position].title;
+    infoHTML.append(titleHTML);
+
+    //create p tag
+    var descriptionHTML = document.createElement("p");
+    descriptionHTML.innerHTML = array[position].text;
+    infoHTML.append(descriptionHTML);
 }

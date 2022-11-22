@@ -1,3 +1,11 @@
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .mycarouselbox {
     max-width: 1280px;
     height: 500px;
@@ -59,12 +67,24 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.614);
+    position: relative;
+    overflow: hidden;
 
 }
-
 .mycarousel_item {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+}
+
+.mycarousel_info {
+    background-color: rgba(0, 0, 0, 0.398);
+    padding: 30px;
+    color: white;
+    width: 45%;
+    height: auto;
+    left: 0;
+    top: 50%;
+    position: absolute;
 }
 
